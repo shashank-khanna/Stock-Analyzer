@@ -78,10 +78,10 @@ class StockAssetAnalyzer(AnalyzerBase):
         # ax2.fill_between(df_volume.index.map(mdates.date2num), df_volume.values, 0)
         plt.show()
 
-    def plot_moving_averages(self):
-        self.stock_data['14Day'] = self.stock_data['Close'].rolling(window=14).mean()
-        self.stock_data['42Day'] = self.stock_data['Close'].rolling(window=42).mean()
-        self.stock_data[['Close', '14Day', '42Day']].plot()
+    def plot_moving_averages(self, window1=14, window2=42):
+        self.stock_data['%dDay' % window1] = self.stock_data['Mean'].rolling(window=window1).mean()
+        self.stock_data['%dDay' % window2] = self.stock_data['Mean'].rolling(window=window2).mean()
+        self.stock_data[['Mean', '%dDay' % window1, '%dDay' % window2]].plot()
         plt.show()
 
     def plot_ols(self):
